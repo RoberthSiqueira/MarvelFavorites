@@ -13,8 +13,7 @@ class MarvelClient {
         static private let timestamp = Int(Date().timeIntervalSince1970).description
         static private let hash = (apiKey + privateKey + timestamp).md5
 
-        static private let limit: Int = 50
-
+        static private let limitParam: Int = 100
         static private let defaultParams = "&apiKey=\(apiKey)&ts=\(timestamp)&hash=\(hash).md5"
 
         case characters(nameStartsWith: String)
@@ -24,7 +23,7 @@ class MarvelClient {
             case .characters(let nameStartsWith):
                     return Endpoints.baseURL +
                             "/characters" +
-                            "/limit=\(Endpoints.limit)" +
+                            "/limit=\(Endpoints.limitParam)" +
                             "&orderBy=modified" +
                             "&nameStartsWith=\(nameStartsWith)" +
                             Endpoints.defaultParams
@@ -36,14 +35,18 @@ class MarvelClient {
         }
     }
 
-    func getCharacters(nameStartsWith: String, completion: @escaping (Bool, Error?) -> Void) {
+    func getCharacters(nameStartsWith: String, completion: @escaping ([Character], Error?) -> Void) {
         let url = Endpoints.characters(nameStartsWith: nameStartsWith).url
-        getRequest(url: url, responseType: Bool.self) { result in
+        getRequest(url: url, responseType: CharacterDataWrapper.self) { result in
             switch result {
-            case .success:
-                completion(true, nil)
+            case .success(let charDataWrapper):
+                guard let results = charDataWrapper.charDataContainer?.results else {
+                    completion([], nil)
+                    return
+                }
+                completion(results, nil)
             case .failure(let error):
-                completion(false, error)
+                completion([], error)
             }
         }
     }
