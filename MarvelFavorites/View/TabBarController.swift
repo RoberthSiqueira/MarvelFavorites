@@ -2,20 +2,6 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-    // MARK: UI
-
-    private lazy var tableModeTabBarItem: UITabBarItem = {
-        let image = UIImage(imageLiteralResourceName: "search")
-        let tabBarItem = UITabBarItem(title: nil, image: image, tag: 0)
-        return tabBarItem
-    }()
-
-    private lazy var collectionModeTabBarItem: UITabBarItem = {
-        let image = UIImage(imageLiteralResourceName: "favorite")
-        let tabBarItem = UITabBarItem(title: nil, image: image, tag: 0)
-        return tabBarItem
-    }()
-
     // MARK: LIFE CYCLE METHODS
 
     override func viewDidLoad() {
@@ -26,5 +12,26 @@ class TabBarController: UITabBarController {
 
     // MARK: PRIVATE METHODS
 
-    private func setupViewControllers() {}
+    private func setupViewControllers() {
+        let navigationControllers = [
+            createSearchCharactersNavigation(),
+            createFavoritesNavigation()
+        ]
+
+        setViewControllers(navigationControllers, animated: true)
+        selectedViewController = navigationControllers[0]
+    }
+
+    private func createSearchCharactersNavigation() -> UINavigationController {
+        let searchCharVC = SearchCharactersViewController()
+        let navigationFromSearchChar = UINavigationController(rootViewController: searchCharVC)
+        navigationFromSearchChar.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+        return navigationFromSearchChar
+    }
+
+    private func createFavoritesNavigation() -> UINavigationController {
+        let navigationFromFavorites = UINavigationController()
+        navigationFromFavorites.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
+        return navigationFromFavorites
+    }
 }
