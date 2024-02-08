@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  MarvelFavorites
-//
-//  Created by Roberth Siqueira on 07/02/24.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -18,7 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
 
-//        window?.rootViewController = 
+        window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
     }
 
