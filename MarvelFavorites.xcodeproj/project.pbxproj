@@ -33,6 +33,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4AD977032B7453A40073CB1C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4AD977042B7453DA0073CB1C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4AD977052B7453E40073CB1C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4AD977062B7453FC0073CB1C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		4AEA58022B7448D300EB5E80 = {
 			isa = PBXGroup;
 			children = (
@@ -53,6 +81,10 @@
 			isa = PBXGroup;
 			children = (
 				4AEA58222B74490800EB5E80 /* AppDelegate */,
+				4AD977062B7453FC0073CB1C /* Network */,
+				4AD977042B7453DA0073CB1C /* Model */,
+				4AD977032B7453A40073CB1C /* View */,
+				4AD977052B7453E40073CB1C /* ViewModel */,
 				4AEA58172B7448D400EB5E80 /* Assets.xcassets */,
 				4AEA58192B7448D400EB5E80 /* LaunchScreen.storyboard */,
 				4AEA581C2B7448D400EB5E80 /* Info.plist */,
@@ -79,6 +111,7 @@
 				4AEA58072B7448D400EB5E80 /* Sources */,
 				4AEA58082B7448D400EB5E80 /* Frameworks */,
 				4AEA58092B7448D400EB5E80 /* Resources */,
+				4AEDDBA92B744F4E0063CEE2 /* Lint */,
 			);
 			buildRules = (
 			);
@@ -133,6 +166,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4AEDDBA92B744F4E0063CEE2 /* Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Lint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then \n    swiftlint\nelse \n    echo \"warning: SwiftLint not installed, download from https: //github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4AEA58072B7448D400EB5E80 /* Sources */ = {
