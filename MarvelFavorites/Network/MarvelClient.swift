@@ -3,26 +3,31 @@ import Foundation
 class MarvelClient {
     static let shared = MarvelClient()
 
-    private let apiKey = "6522eea05abacc2c4526361e6bd0fdda"
-    private let privateKey = "d412fca9cfb394ff4a4a65d925998faaecc93723"
-    private let timestamp = Int(Date().timeIntervalSince1970).description
-    private let limit: Int = 50
     private var total: Int = .zero
 
     enum Endpoints {
 
         static private let baseURL = "https://gateway.marvel.com/v1/public"
+        static private let apiKey = "6522eea05abacc2c4526361e6bd0fdda"
+        static private let privateKey = "d412fca9cfb394ff4a4a65d925998faaecc93723"
+        static private let timestamp = Int(Date().timeIntervalSince1970).description
+        static private let hash = (apiKey + privateKey + timestamp).md5
 
-        case characters(limit: Int, nameStartsWith: String)
+        static private let limit: Int = 50
+
+        static private let defaultParams = "&apiKey=\(apiKey)&ts=\(timestamp)&hash=\(hash).md5"
+
+        case characters(nameStartsWith: String)
 
         var stringValue: String {
             switch self {
-            case .characters(let limit, let nameStartsWith):
+            case .characters(let nameStartsWith):
                     return Endpoints.baseURL +
                             "/characters" +
-                            "/limit=\(limit)" +
+                            "/limit=\(Endpoints.limit)" +
                             "&orderBy=modified" +
-                            "&nameStartsWith=\(nameStartsWith)"
+                            "&nameStartsWith=\(nameStartsWith)" +
+                            Endpoints.defaultParams
             }
         }
 
@@ -32,7 +37,7 @@ class MarvelClient {
     }
 
     func getCharacters(nameStartsWith: String, completion: @escaping (Bool, Error?) -> Void) {
-        let url = Endpoints.characters(limit: limit, nameStartsWith: nameStartsWith).url
+        let url = Endpoints.characters(nameStartsWith: nameStartsWith).url
         getRequest(url: url, responseType: Bool.self) { result in
             switch result {
             case .success:
