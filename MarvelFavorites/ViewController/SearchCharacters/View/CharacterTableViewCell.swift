@@ -46,6 +46,11 @@ class CharacterTableViewCell: UITableViewCell {
 
     // MARK: - API
 
+    func setupCell(name: String, description: String) {
+        nameLabel.text = name
+        descriptionLabel.text = description
+    }
+
     func setupCellImage(_ image: UIImage) {
         DispatchQueue.main.async {
             self.thumbImageView.image = image
@@ -67,7 +72,6 @@ class CharacterTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             thumbImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             thumbImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            thumbImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             thumbImageView.widthAnchor.constraint(equalToConstant: 48),
             thumbImageView.heightAnchor.constraint(equalToConstant: 48)
         ])
@@ -81,7 +85,8 @@ class CharacterTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             descriptionLabel.leadingAnchor.constraint(equalTo: thumbImageView.trailingAnchor, constant: 8),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
 }

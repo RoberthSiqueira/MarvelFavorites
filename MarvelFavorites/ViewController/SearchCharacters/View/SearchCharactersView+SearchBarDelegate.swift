@@ -3,7 +3,7 @@ import UIKit
 extension SearchCharactersView: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // TODO: Search on API
+        delegate?.searchCharacter(with: searchText)
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

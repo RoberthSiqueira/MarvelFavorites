@@ -23,7 +23,7 @@ class TabBarController: UITabBarController {
     }
 
     private func createSearchCharactersNavigation() -> UINavigationController {
-        let searchCharVC = SearchCharactersViewController()
+        let searchCharVC = SearchCharactersViewController(viewModel: SearchCharacterViewModel())
         let navigationFromSearchChar = UINavigationController(rootViewController: searchCharVC)
         navigationFromSearchChar.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
         return navigationFromSearchChar

@@ -1,6 +1,10 @@
 import UIKit
 
-protocol SearchCharactersViewDelegate: AnyObject {}
+protocol SearchCharactersViewDelegate: AnyObject {
+    func numberOfCharacters() -> Int
+    func characterForCell(indexPath: IndexPath) -> Character
+    func searchCharacter(with nameStarts: String)
+}
 
 class SearchCharactersView: UIView {
 
@@ -33,6 +37,12 @@ class SearchCharactersView: UIView {
     func setupView() {
         backgroundColor = .white
         addViewHierarchy()
+    }
+
+    func reloadCharacters() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - VIEW

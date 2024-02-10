@@ -1,9 +1,9 @@
 import Foundation
 
 struct CharacterDataWrapper: Codable {
-    let code: String?
+    let code: Int?
     let status: String?
-    let charDataContainer: CharacterDataContainer?
+    let data: CharacterDataContainer?
 }
 
 struct CharacterDataContainer: Codable {
@@ -11,10 +11,10 @@ struct CharacterDataContainer: Codable {
 }
 
 struct Character: Codable {
-    let id: String
-    let name: String
-    let description: String
-    let thumbnail: CharacterImage
+    let id: Int?
+    let name: String?
+    let description: String?
+    let thumbnail: CharacterImage?
 }
 
 struct CharacterImage: Codable {
