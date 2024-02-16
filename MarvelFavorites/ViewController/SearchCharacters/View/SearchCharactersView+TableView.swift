@@ -23,6 +23,7 @@ extension SearchCharactersView: UITableViewDataSource {
 
 extension SearchCharactersView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Go to detail
+        guard let character = delegate?.characterForCell(indexPath: indexPath) else { return }
+        delegate?.goToCharacterDetails(character)
     }
 }

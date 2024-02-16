@@ -47,8 +47,8 @@ class CharacterTableViewCell: UITableViewCell {
     // MARK: - API
 
     func setupCell(name: String?, description: String?, imageURL: URL?) {
-        self.nameLabel.text = name
-        self.descriptionLabel.text = description
+        nameLabel.text = name
+        descriptionLabel.text = description
 
         if let url = imageURL {
             DispatchQueue.global().async {

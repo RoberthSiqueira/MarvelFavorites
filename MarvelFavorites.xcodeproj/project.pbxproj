@@ -17,6 +17,8 @@
 		4AD9771A2B7819120073CB1C /* SearchCharactersView+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD977192B7819120073CB1C /* SearchCharactersView+TableView.swift */; };
 		4AD9771D2B781A590073CB1C /* CharacterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD9771C2B781A590073CB1C /* CharacterTableViewCell.swift */; };
 		4AD9771F2B7825500073CB1C /* SearchCharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD9771E2B7825500073CB1C /* SearchCharacterViewModel.swift */; };
+		4AD977212B7EF1740073CB1C /* CharacterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD977202B7EF1740073CB1C /* CharacterDetailsViewController.swift */; };
+		4AD977242B7EF1970073CB1C /* CharacterDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD977232B7EF1970073CB1C /* CharacterDetailsView.swift */; };
 		4AEA580F2B7448D400EB5E80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA580E2B7448D400EB5E80 /* AppDelegate.swift */; };
 		4AEA58112B7448D400EB5E80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA58102B7448D400EB5E80 /* SceneDelegate.swift */; };
 		4AEA58182B7448D400EB5E80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AEA58172B7448D400EB5E80 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 		4AD977192B7819120073CB1C /* SearchCharactersView+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchCharactersView+TableView.swift"; sourceTree = "<group>"; };
 		4AD9771C2B781A590073CB1C /* CharacterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTableViewCell.swift; sourceTree = "<group>"; };
 		4AD9771E2B7825500073CB1C /* SearchCharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCharacterViewModel.swift; sourceTree = "<group>"; };
+		4AD977202B7EF1740073CB1C /* CharacterDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailsViewController.swift; sourceTree = "<group>"; };
+		4AD977232B7EF1970073CB1C /* CharacterDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailsView.swift; sourceTree = "<group>"; };
 		4AEA580B2B7448D400EB5E80 /* MarvelFavorites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelFavorites.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AEA580E2B7448D400EB5E80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AEA58102B7448D400EB5E80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +62,7 @@
 			children = (
 				4AD977072B7454940073CB1C /* TabBarController.swift */,
 				4AD977142B759A120073CB1C /* SearchCharacters */,
+				4AD977222B7EF1800073CB1C /* CharacterDetails */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -112,6 +117,15 @@
 				4AD9771C2B781A590073CB1C /* CharacterTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4AD977222B7EF1800073CB1C /* CharacterDetails */ = {
+			isa = PBXGroup;
+			children = (
+				4AD977232B7EF1970073CB1C /* CharacterDetailsView.swift */,
+				4AD977202B7EF1740073CB1C /* CharacterDetailsViewController.swift */,
+			);
+			path = CharacterDetails;
 			sourceTree = "<group>";
 		};
 		4AEA58022B7448D300EB5E80 = {
@@ -248,8 +262,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AD977212B7EF1740073CB1C /* CharacterDetailsViewController.swift in Sources */,
 				4AD977082B7454940073CB1C /* TabBarController.swift in Sources */,
 				4AEA580F2B7448D400EB5E80 /* AppDelegate.swift in Sources */,
+				4AD977242B7EF1970073CB1C /* CharacterDetailsView.swift in Sources */,
 				4AD977182B7815BD0073CB1C /* SearchCharactersView+SearchBarDelegate.swift in Sources */,
 				4AD977112B7598D20073CB1C /* SearchCharactersViewController.swift in Sources */,
 				4AD9771F2B7825500073CB1C /* SearchCharacterViewModel.swift in Sources */,

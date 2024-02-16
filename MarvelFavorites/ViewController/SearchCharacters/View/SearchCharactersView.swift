@@ -4,6 +4,7 @@ protocol SearchCharactersViewDelegate: AnyObject {
     func numberOfCharacters() -> Int
     func characterForCell(indexPath: IndexPath) -> Character
     func searchCharacter(with nameStarts: String)
+    func goToCharacterDetails(_ character: Character)
 }
 
 class SearchCharactersView: UIView {

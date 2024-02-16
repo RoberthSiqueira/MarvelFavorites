@@ -1,0 +1,102 @@
+import UIKit
+
+protocol CharacterDetailsViewDelegate: AnyObject {
+    func didTapFavorite(alreadyIs: Bool)
+}
+
+class CharacterDetailsView: UIView {
+
+    // MARK: - PROPERTIES
+
+    weak var delegate: CharacterDetailsViewDelegate?
+
+    // MARK: - INIT
+
+    init(name: String?, description: String?, imageURL: URL?) {
+        super.init(frame: .zero)
+
+        nameLabel.text = name
+        descriptionLabel.text = description
+
+        if let url = imageURL {
+            DispatchQueue.global().async {
+                if let imageData = try? Data(contentsOf: url) {
+                    let image = UIImage(data: imageData) ?? UIImage()
+                    DispatchQueue.main.async {
+                        self.thumbImageView.image = image
+                        self.setNeedsLayout()
+                    }
+                }
+            }
+        }
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - UI
+
+    private lazy var thumbImageView: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "photo-placeholder")
+        return imageView
+    }()
+
+    private lazy var nameLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        return label
+    }()
+
+    private lazy var descriptionLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+
+    // MARK: - API
+
+    func setupView() {
+        addViewHierarchy()
+    }
+
+    // MARK: - VIEW
+
+    private func addViewHierarchy() {
+        addSubview(thumbImageView)
+        addSubview(nameLabel)
+        addSubview(descriptionLabel)
+
+        setupConstraints()
+    }
+
+    private func setupConstraints() {
+        let safeArea = safeAreaLayoutGuide
+
+        NSLayoutConstraint.activate([
+            thumbImageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
+            thumbImageView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            thumbImageView.widthAnchor.constraint(equalToConstant: 320),
+            thumbImageView.heightAnchor.constraint(equalToConstant: 320)
+        ])
+
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(equalTo: thumbImageView.bottomAnchor, constant: 24),
+            nameLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8),
+            nameLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -8)
+        ])
+
+        NSLayoutConstraint.activate([
+            descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8),
+            descriptionLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -8)
+        ])
+    }
+}

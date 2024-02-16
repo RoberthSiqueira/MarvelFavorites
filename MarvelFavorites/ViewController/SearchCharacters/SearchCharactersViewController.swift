@@ -51,4 +51,9 @@ extension SearchCharactersViewController: SearchCharactersViewDelegate {
             self?.searchCharactersView.reloadCharacters()
         }
     }
+
+    func goToCharacterDetails(_ character: Character) {
+        let detailsVC = CharacterDetailsViewController(character: character)
+        navigationController?.pushViewController(detailsVC, animated: true)
+    }
 }
