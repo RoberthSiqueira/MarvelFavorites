@@ -39,7 +39,10 @@ class MarvelClient {
         nameStartsWith: String,
         completion: @escaping ([Character], Error?) -> Void
     ) -> URLSessionDataTask {
-        let url = Endpoints.characters(nameStartsWith: nameStartsWith).url
+
+        let encodedString = nameStartsWith.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? String()
+        let url = Endpoints.characters(nameStartsWith: encodedString).url
+
         let task = getRequest(url: url, responseType: CharacterDataWrapper.self) { result in
             switch result {
             case .success(let charDataWrapper):
