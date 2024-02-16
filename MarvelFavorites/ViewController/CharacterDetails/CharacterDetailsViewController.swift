@@ -4,12 +4,12 @@ class CharacterDetailsViewController: UIViewController {
 
     // MARK: - PROPERTIES
 
-    let character: Character
+    let viewModel: CharacterDetailsViewModel
 
     // MARK: - INIT
 
-    init(character: Character) {
-        self.character = character
+    init(viewModel: CharacterDetailsViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -29,13 +29,14 @@ class CharacterDetailsViewController: UIViewController {
     // MARK: - METHODS
 
     private func setupView() {
+        let character = viewModel.retrieveCharacter()
         let characterDetailsView = CharacterDetailsView(name: character.name,
                                                         description: character.description,
-                                                        imageURL: character.thumbnail?.imageURL,
-                                                        comics: character.comics?.available,
-                                                        stories: character.stories?.available,
-                                                        events: character.events?.available,
-                                                        series: character.series?.available)
+                                                        imageURL: character.imageURL,
+                                                        comics: character.comics,
+                                                        stories: character.stories,
+                                                        events: character.events,
+                                                        series: character.series)
         characterDetailsView.setupView()
         characterDetailsView.delegate = self
         view = characterDetailsView

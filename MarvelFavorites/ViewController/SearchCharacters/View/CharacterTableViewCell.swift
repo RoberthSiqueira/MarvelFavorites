@@ -1,10 +1,3 @@
-//
-//  CharacterTableViewCell.swift
-//  MarvelFavorites
-//
-//  Created by Roberth Siqueira on 10/02/24.
-//
-
 import UIKit
 
 class CharacterTableViewCell: UITableViewCell {

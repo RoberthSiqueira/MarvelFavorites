@@ -56,8 +56,9 @@ extension SearchCharactersViewController: SearchCharactersViewDelegate {
         }
     }
 
-    func goToCharacterDetails(_ character: Character) {
-        let detailsVC = CharacterDetailsViewController(character: character)
+    func goToCharacterDetails(_ character: CharacterViewModel) {
+        let detailsViewModel = CharacterDetailsViewModel(character: character)
+        let detailsVC = CharacterDetailsViewController(viewModel: detailsViewModel)
         navigationController?.pushViewController(detailsVC, animated: true)
     }
 }

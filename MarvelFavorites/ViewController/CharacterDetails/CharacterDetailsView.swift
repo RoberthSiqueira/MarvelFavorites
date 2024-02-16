@@ -12,16 +12,16 @@ class CharacterDetailsView: UIView {
 
     // MARK: - INIT
 
-    init(name: String?, description: String?, imageURL: URL?, comics: Int?, stories: Int?, events: Int?, series: Int?) {
+    init(name: String, description: String, imageURL: URL?, comics: Int, stories: Int, events: Int, series: Int) {
         super.init(frame: .zero)
 
         nameLabel.text = name
         descriptionLabel.text = description
 
-        comicsLengthLabel.text = "Comics: \(comics ?? 0)"
-        storiesLengthLabel.text = "Stories: \(stories ?? 0)"
-        eventsLengthLabel.text = "Events: \(events ?? 0)"
-        seriesLengthLabel.text = "Series: \(series ?? 0)"
+        comicsLengthLabel.text = "Comics: \(comics)"
+        storiesLengthLabel.text = "Stories: \(stories)"
+        eventsLengthLabel.text = "Events: \(events)"
+        seriesLengthLabel.text = "Series: \(series)"
 
         if let url = imageURL {
             DispatchQueue.global().async {
