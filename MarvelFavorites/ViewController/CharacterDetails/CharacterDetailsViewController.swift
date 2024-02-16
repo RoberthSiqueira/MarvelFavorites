@@ -44,5 +44,7 @@ class CharacterDetailsViewController: UIViewController {
 }
 
 extension CharacterDetailsViewController: CharacterDetailsViewDelegate {
-    func didTapFavorite(alreadyIs: Bool) {}
+    func didTapFavorite(alreadyIs: Bool) {
+        viewModel.toFavorite(alreadyIs)
+    }
 }

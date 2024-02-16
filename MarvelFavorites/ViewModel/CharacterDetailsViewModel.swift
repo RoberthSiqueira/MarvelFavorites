@@ -11,4 +11,8 @@ class CharacterDetailsViewModel {
     func retrieveCharacter() -> CharacterViewModel {
         return character
     }
+
+    func toFavorite(_ alreadyIs: Bool) {
+        // TODO: Add on CoreData if it is not favorite OR Remove from objects on CoreData if it already favorite
+    }
 }
