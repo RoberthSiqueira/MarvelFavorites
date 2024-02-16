@@ -12,11 +12,16 @@ class CharacterDetailsView: UIView {
 
     // MARK: - INIT
 
-    init(name: String?, description: String?, imageURL: URL?) {
+    init(name: String?, description: String?, imageURL: URL?, comics: Int?, stories: Int?, events: Int?, series: Int?) {
         super.init(frame: .zero)
 
         nameLabel.text = name
         descriptionLabel.text = description
+
+        comicsLengthLabel.text = "Comics: \(comics ?? 0)"
+        storiesLengthLabel.text = "Stories: \(stories ?? 0)"
+        eventsLengthLabel.text = "Events: \(events ?? 0)"
+        seriesLengthLabel.text = "Series: \(series ?? 0)"
 
         if let url = imageURL {
             DispatchQueue.global().async {
@@ -61,6 +66,40 @@ class CharacterDetailsView: UIView {
         return label
     }()
 
+    private lazy var comicsLengthLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private lazy var storiesLengthLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private lazy var eventsLengthLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private lazy var seriesLengthLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private lazy var lengthStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [comicsLengthLabel, storiesLengthLabel,
+                                                       eventsLengthLabel, seriesLengthLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
+        return stackView
+    }()
+
     // MARK: - API
 
     func setupView() {
@@ -73,6 +112,7 @@ class CharacterDetailsView: UIView {
         addSubview(thumbImageView)
         addSubview(nameLabel)
         addSubview(descriptionLabel)
+        addSubview(lengthStackView)
 
         setupConstraints()
     }
@@ -97,6 +137,12 @@ class CharacterDetailsView: UIView {
             descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             descriptionLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8),
             descriptionLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -8)
+        ])
+
+        NSLayoutConstraint.activate([
+            lengthStackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            lengthStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+            lengthStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16)
         ])
     }
 }

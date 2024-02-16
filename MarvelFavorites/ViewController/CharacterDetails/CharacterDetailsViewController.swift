@@ -31,7 +31,11 @@ class CharacterDetailsViewController: UIViewController {
     private func setupView() {
         let characterDetailsView = CharacterDetailsView(name: character.name,
                                                         description: character.description,
-                                                        imageURL: character.thumbnail?.imageURL)
+                                                        imageURL: character.thumbnail?.imageURL,
+                                                        comics: character.comics?.available,
+                                                        stories: character.stories?.available,
+                                                        events: character.events?.available,
+                                                        series: character.series?.available)
         characterDetailsView.setupView()
         characterDetailsView.delegate = self
         view = characterDetailsView

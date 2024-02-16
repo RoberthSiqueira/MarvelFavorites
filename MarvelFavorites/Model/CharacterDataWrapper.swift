@@ -15,6 +15,10 @@ struct Character: Codable {
     let name: String?
     let description: String?
     let thumbnail: CharacterImage?
+    let comics: ComicList?
+    let stories: StoriesList?
+    let events: EventsList?
+    let series: SeriesList?
 }
 
 struct CharacterImage: Codable {
@@ -33,4 +37,20 @@ struct CharacterImage: Codable {
         type = try values.decode(String?.self, forKey: .type)
         imageURL = URL(string: "\(path ?? String()).\(type ?? String())")
     }
+}
+
+struct ComicList: Codable {
+    let available: Int?
+}
+
+struct StoriesList: Codable {
+    let available: Int?
+}
+
+struct EventsList: Codable {
+    let available: Int?
+}
+
+struct SeriesList: Codable {
+    let available: Int?
 }

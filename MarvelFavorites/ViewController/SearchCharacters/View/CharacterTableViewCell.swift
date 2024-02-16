@@ -44,6 +44,12 @@ class CharacterTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - LIFE CYCLE
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(false, animated: animated)
+    }
+
     // MARK: - API
 
     func setupCell(name: String?, description: String?, imageURL: URL?) {

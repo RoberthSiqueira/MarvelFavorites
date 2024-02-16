@@ -31,9 +31,9 @@ class SearchCharactersViewController: UIViewController {
     // MARK: - METHODS
 
     private func setupView() {
-        view = searchCharactersView
         searchCharactersView.setupView()
         searchCharactersView.delegate = self
+        view = searchCharactersView
     }
 }
 
