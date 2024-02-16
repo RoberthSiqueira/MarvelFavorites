@@ -100,10 +100,27 @@ class CharacterDetailsView: UIView {
         return stackView
     }()
 
+    private lazy var favoriteButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("FAVORITE", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor.systemBlue.cgColor
+        button.addTarget(self, action: #selector(didTapFavorite), for: .touchUpInside)
+        return button
+    }()
+
     // MARK: - API
 
     func setupView() {
         addViewHierarchy()
+    }
+
+    // MARK: - ACTION
+
+    @objc private func didTapFavorite(_ sender: UIButton) {
+        delegate?.didTapFavorite(alreadyIs: false)
     }
 
     // MARK: - VIEW
@@ -113,6 +130,7 @@ class CharacterDetailsView: UIView {
         addSubview(nameLabel)
         addSubview(descriptionLabel)
         addSubview(lengthStackView)
+        addSubview(favoriteButton)
 
         setupConstraints()
     }
@@ -143,6 +161,12 @@ class CharacterDetailsView: UIView {
             lengthStackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             lengthStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             lengthStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16)
+        ])
+
+        NSLayoutConstraint.activate([
+            favoriteButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8),
+            favoriteButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -8),
+            favoriteButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -16)
         ])
     }
 }

@@ -13,13 +13,15 @@ class SearchCharacterViewModel {
         return characters[indexPath.row]
     }
 
-    func searchCharacter(with nameStartsWith: String, completion: @escaping () -> Void) {
+    func searchCharacter(with nameStartsWith: String, completion: @escaping (_ success: Bool) -> Void) {
         task?.cancel()
         task = marvelclient.getCharacters(nameStartsWith: nameStartsWith) { [weak self] characters, error in
-            if error == nil && !characters.isEmpty {
-                self?.characters = characters
-                completion()
+            guard error == nil && !characters.isEmpty else {
+                completion(false)
+                return
             }
+            self?.characters = characters
+            completion(true)
         }
     }
 

@@ -47,8 +47,12 @@ extension SearchCharactersViewController: SearchCharactersViewDelegate {
     }
 
     func searchCharacter(with nameStarts: String) {
-        viewModel.searchCharacter(with: nameStarts) { [weak self] in
-            self?.searchCharactersView.reloadCharacters()
+        viewModel.searchCharacter(with: nameStarts) { [weak self] success in
+            if success {
+                self?.searchCharactersView.reloadCharacters()
+            } else {
+                self?.searchCharactersView.noCharactersToShow()
+            }
         }
     }
 
