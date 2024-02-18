@@ -24,7 +24,8 @@ extension SearchCharactersView: UITableViewDataSource {
 extension SearchCharactersView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let character = delegate?.characterForCell(indexPath: indexPath) else { return }
-        let characterToView = CharacterModelView(name: character.name ?? String(),
+        let characterToView = CharacterModelView(id: character.id ?? .zero,
+                                                 name: character.name ?? String(),
                                                  description: character.description ?? String(),
                                                  imageURL: character.thumbnail?.imageURL,
                                                  comics: character.comics?.available ?? .zero,

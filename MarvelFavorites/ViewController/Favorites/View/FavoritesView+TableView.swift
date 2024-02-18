@@ -24,7 +24,8 @@ extension FavoritesView: UITableViewDataSource {
 extension FavoritesView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let character = delegate?.characterForCell(indexPath: indexPath) else { return }
-        let characterToView = CharacterModelView(name: character.name,
+        let characterToView = CharacterModelView(id: character.id,
+                                                 name: character.name,
                                                  description: character.description,
                                                  imageURL: character.imageURL,
                                                  comics: character.comics,

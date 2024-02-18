@@ -32,6 +32,7 @@ class CharacterDetailsViewModel {
 
     private func createFavorite() {
         let favorite = Favorite(context: viewContext)
+        favorite.id = Int32(character.id)
         favorite.name = character.name
         favorite.desc = character.description
         favorite.imageURL = character.imageURL
@@ -39,7 +40,7 @@ class CharacterDetailsViewModel {
         favorite.events = Int16(character.events)
         favorite.series = Int16(character.series)
         favorite.stories = Int16(character.stories)
-        favorite.modified = Date()
+        favorite.addedIn = Date()
 
         saveContext()
     }

@@ -27,7 +27,8 @@ class FavoritesViewModel: NSObject {
     func characterForCell(indexPath: IndexPath) -> CharacterModelView? {
         guard let favorite = fetchResultsController?.object(at: indexPath) else { return nil }
 
-        let characterModelView = CharacterModelView(name: favorite.name ?? String(),
+        let characterModelView = CharacterModelView(id: Int(favorite.id),
+                                                    name: favorite.name ?? String(),
                                                     description: favorite.desc ?? String(),
                                                     imageURL: favorite.imageURL,
                                                     comics: Int(favorite.comics),
@@ -56,7 +57,7 @@ class FavoritesViewModel: NSObject {
 
     private func requestFavoriteFetch() -> NSFetchRequest<Favorite> {
         let fetchRequest: NSFetchRequest<Favorite> = Favorite.fetchRequest()
-        let sort = NSSortDescriptor(key: "modified", ascending: false)
+        let sort = NSSortDescriptor(key: "addedIn", ascending: false)
         fetchRequest.sortDescriptors = [sort]
         return fetchRequest
     }

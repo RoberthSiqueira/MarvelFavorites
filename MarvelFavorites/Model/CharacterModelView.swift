@@ -1,6 +1,7 @@
 import Foundation
 
 struct CharacterModelView {
+    let id: Int
     let name: String
     let description: String
     let imageURL: URL?
