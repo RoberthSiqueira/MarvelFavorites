@@ -15,10 +15,10 @@ struct Character: Codable {
     let name: String?
     let description: String?
     let thumbnail: CharacterImage?
-    let comics: ComicList?
-    let stories: StoriesList?
-    let events: EventsList?
-    let series: SeriesList?
+    let comics: List?
+    let stories: List?
+    let events: List?
+    let series: List?
 }
 
 struct CharacterImage: Codable {
@@ -39,18 +39,6 @@ struct CharacterImage: Codable {
     }
 }
 
-struct ComicList: Codable {
-    let available: Int?
-}
-
-struct StoriesList: Codable {
-    let available: Int?
-}
-
-struct EventsList: Codable {
-    let available: Int?
-}
-
-struct SeriesList: Codable {
+struct List: Codable {
     let available: Int?
 }
