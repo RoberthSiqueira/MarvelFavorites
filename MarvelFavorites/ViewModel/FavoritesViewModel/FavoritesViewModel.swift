@@ -18,10 +18,7 @@ class FavoritesViewModel: NSObject {
     // MARK: - API
 
     func numberOfCharacters() -> Int {
-        if let objects = fetchResultsController?.fetchedObjects {
-            return objects.count
-        }
-        return .zero
+        return fetchResultsController?.fetchedObjects?.count ?? .zero
     }
 
     func characterForCell(indexPath: IndexPath) -> CharacterModelView? {

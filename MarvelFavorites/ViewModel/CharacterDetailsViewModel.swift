@@ -31,7 +31,8 @@ class CharacterDetailsViewModel {
 
     func toFavorite(_ alreadyIs: Bool) {
         if alreadyIs {
-            // TODO: Remove objects from View Context
+            guard let favorite = fetchResultsController?.fetchedObjects?.first else { return }
+            deleteFavorite(favorite)
         } else {
             createFavorite()
         }
@@ -59,6 +60,11 @@ class CharacterDetailsViewModel {
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = []
         return fetchRequest
+    }
+
+    private func deleteFavorite(_ favorite: Favorite) {
+        viewContext.delete(favorite)
+        saveContext()
     }
 
     private func createFavorite() {
