@@ -52,4 +52,3 @@ extension FavoritesViewController: FavoritesViewDelegate {
         navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
-
