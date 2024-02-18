@@ -38,6 +38,7 @@ class CharacterDetailsViewModel {
         favorite.events = Int16(character.events)
         favorite.series = Int16(character.series)
         favorite.stories = Int16(character.stories)
+        favorite.modified = Date()
 
         saveContext()
     }
