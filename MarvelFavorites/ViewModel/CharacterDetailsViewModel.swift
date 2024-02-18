@@ -6,25 +6,26 @@ class CharacterDetailsViewModel {
     // MARK: PROPERTIES
 
     private let viewContext = DataController.shared.viewContext
-    private let character: CharacterViewModel
+    private let character: CharacterModelView
 
     // MARK: - INIT
 
-    init(character: CharacterViewModel) {
+    init(character: CharacterModelView) {
         self.character = character
     }
 
     // MARK: - API
 
-    func retrieveCharacter() -> CharacterViewModel {
+    func retrieveCharacter() -> CharacterModelView {
         return character
     }
 
     func toFavorite(_ alreadyIs: Bool) {
         if alreadyIs {
             // TODO: Remove objects from View Context
+        } else {
+            createFavorite()
         }
-        createFavorite()
     }
 
     // MARK: METHODS

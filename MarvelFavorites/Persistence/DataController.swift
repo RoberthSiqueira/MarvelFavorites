@@ -5,7 +5,7 @@ class DataController {
 
     // MARK: PROPERTIES
 
-    static let shared = DataController(modelName: "MarvelFavorites")
+    static let shared = DataController(modelName: "DataModel")
 
     private let container: NSPersistentContainer
 
@@ -15,7 +15,7 @@ class DataController {
 
     // MARK: - INIT
 
-    init(modelName: String) {
+    private init(modelName: String) {
         container = NSPersistentContainer(name: modelName)
     }
 

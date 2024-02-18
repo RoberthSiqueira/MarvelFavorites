@@ -1,7 +1,7 @@
 import CoreData
 import Foundation
 
-class FavoritesVieModel: NSObject {
+class FavoritesViewModel: NSObject {
 
     // MARK: PROPETIES
 
@@ -12,9 +12,30 @@ class FavoritesVieModel: NSObject {
 
     override init() {
         super.init()
+        performFavoritesFetch()
     }
 
     // MARK: - API
+
+    func numberOfCharacters() -> Int {
+        if let objects = fetchResultsController?.fetchedObjects {
+            return objects.count
+        }
+        return .zero
+    }
+
+    func characterForCell(indexPath: IndexPath) -> CharacterModelView? {
+        guard let favorite = fetchResultsController?.object(at: indexPath) else { return nil }
+
+        let characterModelView = CharacterModelView(name: favorite.name ?? String(),
+                                                    description: favorite.desc ?? String(),
+                                                    imageURL: favorite.imageURL,
+                                                    comics: Int(favorite.comics),
+                                                    stories: Int(favorite.stories),
+                                                    events: Int(favorite.events),
+                                                    series: Int(favorite.series))
+        return characterModelView
+    }
 
     // MARK: METHODS
 

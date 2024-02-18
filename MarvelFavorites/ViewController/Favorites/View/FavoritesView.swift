@@ -1,28 +1,18 @@
 import UIKit
 
-protocol SearchCharactersViewDelegate: AnyObject {
+protocol FavoritesViewDelegate: AnyObject {
     func numberOfCharacters() -> Int
-    func characterForCell(indexPath: IndexPath) -> Character
-    func searchCharacter(with nameStarts: String)
+    func characterForCell(indexPath: IndexPath) -> CharacterModelView?
     func goToCharacterDetails(_ character: CharacterModelView)
 }
 
-class SearchCharactersView: UIView {
+class FavoritesView: UIView {
 
     // MARK: - PROPERTIES
 
-    weak var delegate: SearchCharactersViewDelegate?
+    weak var delegate: FavoritesViewDelegate?
 
     // MARK: - UI
-
-    private lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar(frame: .zero)
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.enablesReturnKeyAutomatically = true
-        searchBar.delegate = self
-        searchBar.placeholder = "Character's name"
-        return searchBar
-    }()
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
@@ -65,7 +55,6 @@ class SearchCharactersView: UIView {
     // MARK: - VIEW
 
     private func addViewHierarchy() {
-        addSubview(searchBar)
         addSubview(tableView)
         addSubview(noCharactersLabel)
 
@@ -76,13 +65,7 @@ class SearchCharactersView: UIView {
         let safeArea = safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            searchBar.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            searchBar.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)

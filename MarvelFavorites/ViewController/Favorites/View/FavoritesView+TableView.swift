@@ -1,6 +1,6 @@
 import UIKit
 
-extension SearchCharactersView: UITableViewDataSource {
+extension FavoritesView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let length = delegate?.numberOfCharacters() else { return 0 }
         return length
@@ -15,22 +15,22 @@ extension SearchCharactersView: UITableViewDataSource {
 
         cell.setupCell(name: character.name,
                        description: character.description,
-                       imageURL: character.thumbnail?.imageURL)
+                       imageURL: character.imageURL)
 
         return cell
     }
 }
 
-extension SearchCharactersView: UITableViewDelegate {
+extension FavoritesView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let character = delegate?.characterForCell(indexPath: indexPath) else { return }
-        let characterToView = CharacterModelView(name: character.name ?? String(),
-                                                 description: character.description ?? String(),
-                                                 imageURL: character.thumbnail?.imageURL,
-                                                 comics: character.comics?.available ?? .zero,
-                                                 stories: character.stories?.available ?? .zero,
-                                                 events: character.events?.available ?? .zero,
-                                                 series: character.series?.available ?? .zero)
+        let characterToView = CharacterModelView(name: character.name,
+                                                 description: character.description,
+                                                 imageURL: character.imageURL,
+                                                 comics: character.comics,
+                                                 stories: character.stories,
+                                                 events: character.events,
+                                                 series: character.series)
         delegate?.goToCharacterDetails(characterToView)
     }
 }

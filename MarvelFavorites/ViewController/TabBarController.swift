@@ -30,7 +30,8 @@ class TabBarController: UITabBarController {
     }
 
     private func createFavoritesNavigation() -> UINavigationController {
-        let navigationFromFavorites = UINavigationController()
+        let favoritesVC = FavoritesViewController(viewModel: FavoritesViewModel())
+        let navigationFromFavorites = UINavigationController(rootViewController: favoritesVC)
         navigationFromFavorites.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
         return navigationFromFavorites
     }

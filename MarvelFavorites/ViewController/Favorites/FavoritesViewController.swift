@@ -1,16 +1,16 @@
 import UIKit
 
-class SearchCharactersViewController: UIViewController {
+class FavoritesViewController: UIViewController {
 
     // MARK: - PROPERTIES
 
-    private let searchCharactersView = SearchCharactersView()
+    private let favoriteView = FavoritesView()
 
-    let viewModel: SearchCharacterViewModel
+    let viewModel: FavoritesViewModel
 
     // MARK: - INIT
 
-    init(viewModel: SearchCharacterViewModel) {
+    init(viewModel: FavoritesViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -24,36 +24,26 @@ class SearchCharactersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Search Characters"
+        navigationItem.title = "Favorite Characters"
         setupView()
     }
 
     // MARK: - METHODS
 
     private func setupView() {
-        searchCharactersView.setupView()
-        searchCharactersView.delegate = self
-        view = searchCharactersView
+        favoriteView.setupView()
+        favoriteView.delegate = self
+        view = favoriteView
     }
 }
 
-extension SearchCharactersViewController: SearchCharactersViewDelegate {
+extension FavoritesViewController: FavoritesViewDelegate {
     func numberOfCharacters() -> Int {
         return viewModel.numberOfCharacters()
     }
 
-    func characterForCell(indexPath: IndexPath) -> Character {
+    func characterForCell(indexPath: IndexPath) -> CharacterModelView? {
         return viewModel.characterForCell(indexPath: indexPath)
-    }
-
-    func searchCharacter(with nameStarts: String) {
-        viewModel.searchCharacter(with: nameStarts) { [weak self] success in
-            if success {
-                self?.searchCharactersView.reloadCharacters()
-            } else {
-                self?.searchCharactersView.noCharactersToShow()
-            }
-        }
     }
 
     func goToCharacterDetails(_ character: CharacterModelView) {
@@ -62,3 +52,4 @@ extension SearchCharactersViewController: SearchCharactersViewDelegate {
         navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
+
