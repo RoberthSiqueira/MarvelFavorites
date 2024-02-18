@@ -6,18 +6,27 @@ class CharacterDetailsViewModel {
     // MARK: PROPERTIES
 
     private let viewContext = DataController.shared.viewContext
+    private var fetchResultsController: NSFetchedResultsController<Favorite>?
     private let character: CharacterModelView
 
     // MARK: - INIT
 
     init(character: CharacterModelView) {
         self.character = character
+        performFavoriteCheck()
     }
 
     // MARK: - API
 
     func retrieveCharacter() -> CharacterModelView {
         return character
+    }
+
+    func isFavoriteCharacter() -> Bool {
+        if let object = fetchResultsController?.fetchedObjects {
+            return !object.isEmpty
+        }
+        return false
     }
 
     func toFavorite(_ alreadyIs: Bool) {
@@ -29,6 +38,28 @@ class CharacterDetailsViewModel {
     }
 
     // MARK: METHODS
+
+    private func performFavoriteCheck() {
+        let query = requestFavoriteFetch()
+        fetchResultsController = NSFetchedResultsController(fetchRequest: query,
+                                                            managedObjectContext: viewContext,
+                                                            sectionNameKeyPath: nil,
+                                                            cacheName: nil)
+        do {
+            try fetchResultsController?.performFetch()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+
+    private func requestFavoriteFetch() -> NSFetchRequest<Favorite> {
+        let fetchRequest: NSFetchRequest<Favorite> = Favorite.fetchRequest()
+        let predicate = NSPredicate(format: "id == %i", character.id)
+
+        fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = []
+        return fetchRequest
+    }
 
     private func createFavorite() {
         let favorite = Favorite(context: viewContext)

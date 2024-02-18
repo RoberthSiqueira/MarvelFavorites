@@ -40,13 +40,15 @@ class CharacterDetailsViewController: UIViewController {
 
     private func setupView() {
         let character = viewModel.retrieveCharacter()
+        let isFavorite = viewModel.isFavoriteCharacter()
         let characterDetailsView = CharacterDetailsView(name: character.name,
                                                         description: character.description,
                                                         imageURL: character.imageURL,
                                                         comics: character.comics,
                                                         stories: character.stories,
                                                         events: character.events,
-                                                        series: character.series)
+                                                        series: character.series,
+                                                        isFavorite: isFavorite)
         characterDetailsView.setupView()
         characterDetailsView.delegate = self
         view = characterDetailsView

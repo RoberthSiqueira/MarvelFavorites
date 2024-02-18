@@ -8,11 +8,16 @@ class CharacterDetailsView: UIView {
 
     // MARK: - PROPERTIES
 
+    private var isFavorite: Bool
     weak var delegate: CharacterDetailsViewDelegate?
 
     // MARK: - INIT
 
-    init(name: String, description: String, imageURL: URL?, comics: Int, stories: Int, events: Int, series: Int) {
+    init(name: String, description: String, imageURL: URL?, comics: Int,
+         stories: Int, events: Int, series: Int, isFavorite: Bool) {
+
+        self.isFavorite = isFavorite
+
         super.init(frame: .zero)
 
         nameLabel.text = name
@@ -34,6 +39,8 @@ class CharacterDetailsView: UIView {
                 }
             }
         }
+
+        favoriteBehavior(isFavorite: isFavorite)
     }
 
     @available(*, unavailable)
@@ -103,10 +110,7 @@ class CharacterDetailsView: UIView {
     private lazy var favoriteButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("FAVORITE", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
         button.layer.borderWidth = 1.0
-        button.layer.borderColor = UIColor.systemBlue.cgColor
         button.addTarget(self, action: #selector(didTapFavorite), for: .touchUpInside)
         return button
     }()
@@ -120,7 +124,17 @@ class CharacterDetailsView: UIView {
     // MARK: - ACTION
 
     @objc private func didTapFavorite(_ sender: UIButton) {
-        delegate?.didTapFavorite(alreadyIs: false)
+        delegate?.didTapFavorite(alreadyIs: isFavorite)
+        isFavorite.toggle()
+        favoriteBehavior(isFavorite: isFavorite)
+    }
+
+    // MARK: - METHODS
+
+    private func favoriteBehavior(isFavorite: Bool) {
+        favoriteButton.setTitle(isFavorite ? "UNFAVORITE" : "FAVORITE", for: .normal)
+        favoriteButton.setTitleColor(isFavorite ? .systemRed : .systemBlue, for: .normal)
+        favoriteButton.layer.borderColor = isFavorite ? UIColor.systemRed.cgColor : UIColor.systemBlue.cgColor
     }
 
     // MARK: - VIEW
