@@ -54,7 +54,8 @@ class CharacterDetailsView: UIView {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "photo-placeholder")
+        imageView.tintColor = .systemGray
+        imageView.image = UIImage(systemName: "person.crop.rectangle")
         return imageView
     }()
 
