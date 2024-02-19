@@ -8,6 +8,9 @@ class FavoritesViewModel: NSObject {
     private let viewContext = DataController.shared.viewContext
     private var fetchResultsController: NSFetchedResultsController<Favorite>?
 
+    @Published var indexPathInsert: IndexPath = IndexPath()
+    @Published var indexPathDelete: IndexPath = IndexPath()
+
     // MARK: - INIT
 
     override init() {

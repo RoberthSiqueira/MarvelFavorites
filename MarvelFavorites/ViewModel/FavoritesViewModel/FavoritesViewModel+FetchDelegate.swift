@@ -5,11 +5,9 @@ extension FavoritesViewModel: NSFetchedResultsControllerDelegate {
                     at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
-            // TODO: Add character on table view
-            break
+            indexPathInsert = newIndexPath ?? IndexPath()
         case .delete:
-            // TODO: Delete character from table view
-            break
+            indexPathDelete = indexPath ?? IndexPath()
         default:
             break
         }

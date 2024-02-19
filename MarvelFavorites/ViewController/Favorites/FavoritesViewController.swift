@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 
 class FavoritesViewController: UIViewController {
@@ -5,6 +6,8 @@ class FavoritesViewController: UIViewController {
     // MARK: - PROPERTIES
 
     private let favoriteView = FavoritesView()
+
+    private var subscriptions = Set<AnyCancellable>()
 
     let viewModel: FavoritesViewModel
 
@@ -26,6 +29,7 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "Favorite Characters"
         setupView()
+        setupBindings()
     }
 
     // MARK: - METHODS
@@ -34,6 +38,18 @@ class FavoritesViewController: UIViewController {
         favoriteView.setupView()
         favoriteView.delegate = self
         view = favoriteView
+    }
+
+    private func setupBindings() {
+        viewModel.$indexPathInsert.sink(receiveValue: { [weak self] indexPath in
+            guard !indexPath.isEmpty else { return }
+            self?.favoriteView.insertRowOnTableView(indexPath: indexPath)
+        }).store(in: &subscriptions)
+
+        viewModel.$indexPathDelete.sink(receiveValue: { [weak self] indexPath in
+            guard !indexPath.isEmpty else { return }
+            self?.favoriteView.deleteRowFromTable(indexPath: indexPath)
+        }).store(in: &subscriptions)
     }
 }
 

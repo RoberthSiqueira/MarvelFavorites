@@ -52,6 +52,14 @@ class FavoritesView: UIView {
         noCharactersLabel.isHidden = false
     }
 
+    func deleteRowFromTable(indexPath: IndexPath) {
+        tableView.deleteRows(at: [indexPath], with: .none)
+    }
+
+    func insertRowOnTableView(indexPath: IndexPath) {
+        tableView.insertRows(at: [indexPath], with: .none)
+    }
+
     // MARK: - VIEW
 
     private func addViewHierarchy() {
