@@ -76,34 +76,40 @@ class CharacterDetailsView: UIView {
 
     private lazy var comicsLengthLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private lazy var storiesLengthLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private lazy var eventsLengthLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private lazy var seriesLengthLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private lazy var lengthStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [comicsLengthLabel, storiesLengthLabel,
-                                                       eventsLengthLabel, seriesLengthLabel])
+    private lazy var topStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [comicsLengthLabel, storiesLengthLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.alignment = .center
+        stackView.alignment = .fill
+        stackView.spacing = 16
+        stackView.distribution = .equalSpacing
+        return stackView
+    }()
+
+    private lazy var bottomStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [eventsLengthLabel, seriesLengthLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.spacing = 16
         stackView.distribution = .equalSpacing
         return stackView
     }()
@@ -144,7 +150,8 @@ class CharacterDetailsView: UIView {
         addSubview(thumbImageView)
         addSubview(nameLabel)
         addSubview(descriptionLabel)
-        addSubview(lengthStackView)
+        addSubview(topStackView)
+        addSubview(bottomStackView)
         addSubview(favoriteButton)
 
         setupConstraints()
@@ -173,9 +180,15 @@ class CharacterDetailsView: UIView {
         ])
 
         NSLayoutConstraint.activate([
-            lengthStackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            lengthStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
-            lengthStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16)
+            topStackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            topStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+            topStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16)
+        ])
+
+        NSLayoutConstraint.activate([
+            bottomStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 8),
+            bottomStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+            bottomStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16)
         ])
 
         NSLayoutConstraint.activate([
