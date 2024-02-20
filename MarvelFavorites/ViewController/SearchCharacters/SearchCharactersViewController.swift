@@ -4,7 +4,7 @@ class SearchCharactersViewController: UIViewController {
 
     // MARK: - PROPERTIES
 
-    private let searchCharactersView = SearchCharactersView()
+    private(set) var searchCharactersView = SearchCharactersView()
 
     let viewModel: SearchCharacterViewModel
 
@@ -47,11 +47,14 @@ extension SearchCharactersViewController: SearchCharactersViewDelegate {
     }
 
     func searchCharacter(with nameStarts: String) {
+        searchCharactersView.setViewState(.loading)
+
         viewModel.searchCharacter(with: nameStarts) { [weak self] success in
             if success {
+                self?.searchCharactersView.setViewState(.content)
                 self?.searchCharactersView.reloadCharacters()
             } else {
-                self?.searchCharactersView.noCharactersToShow()
+                self?.searchCharactersView.setViewState(.empty)
             }
         }
     }

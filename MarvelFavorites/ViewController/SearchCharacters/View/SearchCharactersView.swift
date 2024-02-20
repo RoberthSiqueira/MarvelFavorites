@@ -13,6 +13,12 @@ class SearchCharactersView: UIView {
 
     weak var delegate: SearchCharactersViewDelegate?
 
+    enum ViewState {
+        case loading
+        case empty
+        case content
+    }
+
     // MARK: - UI
 
     private lazy var searchBar: UISearchBar = {
@@ -33,6 +39,13 @@ class SearchCharactersView: UIView {
         return tableView
     }()
 
+    private lazy var loadingView: UIActivityIndicatorView = {
+        let loadingView = UIActivityIndicatorView(style: .large)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.hidesWhenStopped = true
+        return loadingView
+    }()
+
     private lazy var noCharactersLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,17 +62,29 @@ class SearchCharactersView: UIView {
         addViewHierarchy()
     }
 
-    func reloadCharacters() {
+    func setViewState(_ state: ViewState) {
         DispatchQueue.main.async {
-            self.noCharactersLabel.isHidden = true
-            self.tableView.isHidden = false
-            self.tableView.reloadData()
+            switch state {
+            case .loading:
+                self.noCharactersLabel.isHidden = true
+                self.loadingView.startAnimating()
+                self.tableView.isHidden = true
+            case .empty:
+                self.noCharactersLabel.isHidden = false
+                self.loadingView.stopAnimating()
+                self.tableView.isHidden = true
+            case .content:
+                self.noCharactersLabel.isHidden = true
+                self.loadingView.stopAnimating()
+                self.tableView.isHidden = false
+            }
         }
     }
 
-    func noCharactersToShow() {
-        tableView.isHidden = true
-        noCharactersLabel.isHidden = false
+    func reloadCharacters() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - VIEW
@@ -67,6 +92,7 @@ class SearchCharactersView: UIView {
     private func addViewHierarchy() {
         addSubview(searchBar)
         addSubview(tableView)
+        addSubview(loadingView)
         addSubview(noCharactersLabel)
 
         setupConstraints()
@@ -86,6 +112,11 @@ class SearchCharactersView: UIView {
             tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            loadingView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor)
         ])
 
         NSLayoutConstraint.activate([
