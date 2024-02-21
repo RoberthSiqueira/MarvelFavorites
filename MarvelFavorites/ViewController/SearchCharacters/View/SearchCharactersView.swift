@@ -37,6 +37,7 @@ class SearchCharactersView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: "CharacterCell")
+        tableView.keyboardDismissMode = .onDrag
         return tableView
     }()
 
@@ -82,7 +83,6 @@ class SearchCharactersView: UIView {
                 self.noCharactersLabel.isHidden = true
                 self.loadingView.stopAnimating()
                 self.tableView.isHidden = true
-                // show alert
             }
         }
     }

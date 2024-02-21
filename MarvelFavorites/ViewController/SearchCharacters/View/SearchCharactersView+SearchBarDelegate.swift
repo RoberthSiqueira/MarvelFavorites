@@ -16,6 +16,7 @@ extension SearchCharactersView: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         searchBar.endEditing(true)
     }
 }
