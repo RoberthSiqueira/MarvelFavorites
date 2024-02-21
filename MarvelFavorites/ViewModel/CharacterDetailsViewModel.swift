@@ -7,18 +7,38 @@ class CharacterDetailsViewModel {
 
     private let viewContext = DataController.shared.viewContext
     private var fetchResultsController: NSFetchedResultsController<Favorite>?
-    private let character: CharacterModelView
+    private var character: CharacterModelView
 
     // MARK: - INIT
 
     init(character: CharacterModelView) {
         self.character = character
+
+        if let url = character.imageURL {
+            DispatchQueue.global().async {
+                if let imageData = try? Data(contentsOf: url) {
+                    self.character.imageData = imageData
+                }
+            }
+        }
+
         performFavoriteCheck()
     }
 
     // MARK: - API
 
     func retrieveCharacter() -> CharacterModelView {
+        if let favorite = fetchResultsController?.fetchedObjects?.first {
+            return CharacterModelView(id: Int(favorite.id),
+                                      name: favorite.name ?? String(),
+                                      description: favorite.desc ?? String(),
+                                      imageURL: nil,
+                                      imageData: favorite.image,
+                                      comics: Int(favorite.comics),
+                                      stories: Int(favorite.stories),
+                                      events: Int(favorite.events),
+                                      series: Int(favorite.series))
+        }
         return character
     }
 
@@ -72,7 +92,7 @@ class CharacterDetailsViewModel {
         favorite.id = Int32(character.id)
         favorite.name = character.name
         favorite.desc = character.description
-        favorite.imageURL = character.imageURL
+        favorite.image = character.imageData
         favorite.comics = Int16(character.comics)
         favorite.events = Int16(character.events)
         favorite.series = Int16(character.series)

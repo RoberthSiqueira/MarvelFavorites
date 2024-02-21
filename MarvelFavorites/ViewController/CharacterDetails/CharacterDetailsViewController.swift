@@ -44,6 +44,7 @@ class CharacterDetailsViewController: UIViewController {
         let characterDetailsView = CharacterDetailsView(name: character.name,
                                                         description: character.description,
                                                         imageURL: character.imageURL,
+                                                        imageData: character.imageData,
                                                         comics: character.comics,
                                                         stories: character.stories,
                                                         events: character.events,

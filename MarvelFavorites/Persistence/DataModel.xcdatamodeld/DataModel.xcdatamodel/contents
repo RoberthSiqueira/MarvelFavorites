@@ -6,7 +6,7 @@
         <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="events" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="imageURL" optional="YES" attributeType="URI" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="series" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="stories" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

@@ -13,10 +13,15 @@ extension FavoritesView: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.setupCell(name: character.name,
-                       description: character.description,
-                       imageURL: character.imageURL)
-
+        if let imageData = character.imageData {
+            cell.setupCell(name: character.name,
+                           description: character.description,
+                           imageData: imageData)
+        } else {
+            cell.setupCell(name: character.name,
+                           description: character.description,
+                           imageURL: character.imageURL)
+        }
         return cell
     }
 }

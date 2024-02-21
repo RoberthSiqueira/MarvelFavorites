@@ -13,8 +13,8 @@ class CharacterDetailsView: UIView {
 
     // MARK: - INIT
 
-    init(name: String, description: String, imageURL: URL?, comics: Int,
-         stories: Int, events: Int, series: Int, isFavorite: Bool) {
+    init(name: String, description: String, imageURL: URL?, imageData: Data?,
+         comics: Int, stories: Int, events: Int, series: Int, isFavorite: Bool) {
 
         self.isFavorite = isFavorite
 
@@ -28,17 +28,7 @@ class CharacterDetailsView: UIView {
         eventsLengthLabel.text = "Events: \(events)"
         seriesLengthLabel.text = "Series: \(series)"
 
-        if let url = imageURL {
-            DispatchQueue.global().async {
-                if let imageData = try? Data(contentsOf: url) {
-                    let image = UIImage(data: imageData) ?? UIImage()
-                    DispatchQueue.main.async {
-                        self.thumbImageView.image = image
-                        self.setNeedsLayout()
-                    }
-                }
-            }
-        }
+        fillImage(imageURL: imageURL, imageData: imageData)
 
         favoriteBehavior(isFavorite: isFavorite)
     }
@@ -155,6 +145,28 @@ class CharacterDetailsView: UIView {
         favoriteButton.setTitle(isFavorite ? "UNFAVORITE" : "FAVORITE", for: .normal)
         favoriteButton.setTitleColor(isFavorite ? .systemRed : .systemBlue, for: .normal)
         favoriteButton.layer.borderColor = isFavorite ? UIColor.systemRed.cgColor : UIColor.systemBlue.cgColor
+    }
+
+    private func fillImage(imageURL: URL?, imageData: Data?) {
+        if let imageData = imageData {
+            let image = UIImage(data: imageData) ?? UIImage()
+            DispatchQueue.main.async {
+                self.thumbImageView.image = image
+                self.setNeedsLayout()
+            }
+        } else {
+            if let url = imageURL {
+                DispatchQueue.global().async {
+                    if let imageData = try? Data(contentsOf: url) {
+                        let image = UIImage(data: imageData) ?? UIImage()
+                        DispatchQueue.main.async {
+                            self.thumbImageView.image = image
+                            self.setNeedsLayout()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // MARK: - VIEW

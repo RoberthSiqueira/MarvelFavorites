@@ -63,6 +63,17 @@ class CharacterTableViewCell: UITableViewCell {
         }
     }
 
+    func setupCell(name: String?, description: String?, imageData: Data) {
+        nameLabel.text = name
+        descriptionLabel.text = description
+
+        let image = UIImage(data: imageData) ?? UIImage()
+        DispatchQueue.main.async {
+            self.thumbImageView.image = image
+            self.setNeedsLayout()
+        }
+    }
+
     // MARK: - VIEW
 
     private func addViewHierarchy() {
