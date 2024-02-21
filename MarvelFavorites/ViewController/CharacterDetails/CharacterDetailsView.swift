@@ -50,6 +50,19 @@ class CharacterDetailsView: UIView {
 
     // MARK: - UI
 
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView(frame: .zero)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
+
+    private lazy var containerView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     private lazy var thumbImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -147,54 +160,76 @@ class CharacterDetailsView: UIView {
     // MARK: - VIEW
 
     private func addViewHierarchy() {
-        addSubview(thumbImageView)
-        addSubview(nameLabel)
-        addSubview(descriptionLabel)
-        addSubview(topStackView)
-        addSubview(bottomStackView)
-        addSubview(favoriteButton)
+        addSubview(scrollView)
+        scrollView.addSubview(containerView)
 
+        containerView.addSubview(thumbImageView)
+        containerView.addSubview(nameLabel)
+        containerView.addSubview(descriptionLabel)
+        containerView.addSubview(topStackView)
+        containerView.addSubview(bottomStackView)
+        containerView.addSubview(favoriteButton)
+
+        setupScrollViewConstraints()
         setupConstraints()
     }
 
-    private func setupConstraints() {
+    private func setupScrollViewConstraints() {
         let safeArea = safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
-            thumbImageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
-            thumbImageView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+    }
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            thumbImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
+            thumbImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             thumbImageView.widthAnchor.constraint(equalToConstant: 320),
             thumbImageView.heightAnchor.constraint(equalToConstant: 320)
         ])
 
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: thumbImageView.bottomAnchor, constant: 24),
-            nameLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8),
-            nameLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -8)
+            nameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8)
         ])
 
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
-            descriptionLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8),
-            descriptionLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -8)
+            descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8)
         ])
 
         NSLayoutConstraint.activate([
             topStackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            topStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
-            topStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16)
+            topStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            topStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
         ])
 
         NSLayoutConstraint.activate([
             bottomStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 8),
-            bottomStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
-            bottomStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16)
+            bottomStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            bottomStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
         ])
 
         NSLayoutConstraint.activate([
-            favoriteButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8),
-            favoriteButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -8),
-            favoriteButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -16)
+            favoriteButton.topAnchor.constraint(equalTo: bottomStackView.bottomAnchor, constant: 16),
+            favoriteButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            favoriteButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+            favoriteButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16)
         ])
     }
 }
