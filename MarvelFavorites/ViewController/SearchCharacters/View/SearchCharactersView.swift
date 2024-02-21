@@ -17,6 +17,7 @@ class SearchCharactersView: UIView {
         case loading
         case empty
         case content
+        case error
     }
 
     // MARK: - UI
@@ -77,6 +78,11 @@ class SearchCharactersView: UIView {
                 self.noCharactersLabel.isHidden = true
                 self.loadingView.stopAnimating()
                 self.tableView.isHidden = false
+            case .error:
+                self.noCharactersLabel.isHidden = true
+                self.loadingView.stopAnimating()
+                self.tableView.isHidden = true
+                // show alert
             }
         }
     }

@@ -3,6 +3,7 @@ import UIKit
 extension SearchCharactersView: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else { return }
         delegate?.searchCharacter(with: searchText)
     }
 

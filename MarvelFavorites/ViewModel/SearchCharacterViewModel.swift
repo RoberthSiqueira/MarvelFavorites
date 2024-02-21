@@ -16,7 +16,7 @@ class SearchCharacterViewModel {
     func searchCharacter(with nameStartsWith: String, completion: @escaping (_ success: Bool) -> Void) {
         task?.cancel()
         task = marvelclient.getCharacters(nameStartsWith: nameStartsWith) { [weak self] characters, error in
-            guard error == nil && !characters.isEmpty else {
+            guard error == nil else {
                 completion(false)
                 return
             }

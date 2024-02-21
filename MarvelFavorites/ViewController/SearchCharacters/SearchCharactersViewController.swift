@@ -35,6 +35,29 @@ class SearchCharactersViewController: UIViewController {
         searchCharactersView.delegate = self
         view = searchCharactersView
     }
+
+    private func searchCharacterHandler(_ success: Bool) {
+        let isThereCharacter = viewModel.numberOfCharacters() > 0
+
+        if success && isThereCharacter {
+            searchCharactersView.setViewState(.content)
+            searchCharactersView.reloadCharacters()
+        } else if success && !isThereCharacter {
+            searchCharactersView.setViewState(.empty)
+        } else {
+            searchCharactersView.setViewState(.error)
+            showConnectionError()
+        }
+    }
+
+    private func showConnectionError() {
+        let alert = UIAlertController(title: "Connection Error",
+                                      message: "Check your connectivity with the internet.",
+                                      preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: "Sure", style: .default)
+        alert.addAction(actionOk)
+        present(alert, animated: true)
+    }
 }
 
 extension SearchCharactersViewController: SearchCharactersViewDelegate {
@@ -48,15 +71,7 @@ extension SearchCharactersViewController: SearchCharactersViewDelegate {
 
     func searchCharacter(with nameStarts: String) {
         searchCharactersView.setViewState(.loading)
-
-        viewModel.searchCharacter(with: nameStarts) { [weak self] success in
-            if success {
-                self?.searchCharactersView.setViewState(.content)
-                self?.searchCharactersView.reloadCharacters()
-            } else {
-                self?.searchCharactersView.setViewState(.empty)
-            }
-        }
+        viewModel.searchCharacter(with: nameStarts, completion: searchCharacterHandler(_:))
     }
 
     func goToCharacterDetails(_ character: CharacterModelView) {
