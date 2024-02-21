@@ -41,13 +41,14 @@ class SearchCharactersViewController: UIViewController {
 
         if success && isThereCharacter {
             searchCharactersView.setViewState(.content)
-            searchCharactersView.reloadCharacters()
         } else if success && !isThereCharacter {
             searchCharactersView.setViewState(.empty)
         } else {
             searchCharactersView.setViewState(.error)
             showConnectionError()
         }
+
+        searchCharactersView.reloadCharacters()
     }
 
     private func showConnectionError() {

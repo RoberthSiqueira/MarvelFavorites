@@ -64,23 +64,28 @@ class MarvelClient {
         completion: @escaping (Result<ResponseType, Error>) -> Void
     ) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    completion(.failure(NetworkError.badURL))
-                }
-                return
-            }
+            if let data {
+                let decoder = JSONDecoder()
+                do {
+                    let decodableObject = try decoder.decode(responseType, from: data)
 
-            let decoder = JSONDecoder()
-            do {
-                let decodableObject = try decoder.decode(responseType, from: data)
-
-                DispatchQueue.main.async {
-                    completion(.success(decodableObject))
+                    DispatchQueue.main.async {
+                        completion(.success(decodableObject))
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
                 }
-            } catch {
-                DispatchQueue.main.async {
-                    completion(.failure(error))
+            } else {
+                if let nserror = error as? NSError, nserror.code == -999 {
+                    DispatchQueue.main.async {
+                        completion(.failure(NetworkError.cancelled))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(.failure(NetworkError.badURL))
+                    }
                 }
             }
         }
@@ -91,4 +96,5 @@ class MarvelClient {
 
 enum NetworkError: Error {
     case badURL
+    case cancelled
 }
