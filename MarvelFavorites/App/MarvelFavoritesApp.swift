@@ -4,17 +4,22 @@ import SwiftUI
 struct MarvelFavoritesApp: App {
     var body: some Scene {
         WindowGroup {
-            MarvelFavorites()
+            MarvelFavoritesTab()
         }
     }
 }
 
-struct MarvelFavorites: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct MarvelFavoritesTab: UIViewControllerRepresentable {
+    typealias UIViewControllerType = TabBarController
+
+    func makeUIViewController(context: Context) -> TabBarController {
+        let tabbarController = TabBarController()
+        return tabbarController
     }
+
+    func updateUIViewController(_ uiViewController: TabBarController, context: Context) { }
 }
 
 #Preview {
-    MarvelFavorites()
+    MarvelFavoritesTab()
 }

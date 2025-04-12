@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4AC1A46E2D98385300933D3E /* MarvelFavoritesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC1A46D2D98385300933D3E /* MarvelFavoritesApp.swift */; };
-		4AC1A46F2D983B2500933D3E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA58102B7448D400EB5E80 /* SceneDelegate.swift */; };
-		4AC1A4702D983B2500933D3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA580E2B7448D400EB5E80 /* AppDelegate.swift */; };
 		4AD977082B7454940073CB1C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD977072B7454940073CB1C /* TabBarController.swift */; };
 		4AD9770A2B7455EF0073CB1C /* MarvelClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD977092B7455EF0073CB1C /* MarvelClient.swift */; };
 		4AD9770D2B758C940073CB1C /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD9770C2B758C930073CB1C /* String+MD5.swift */; };
@@ -59,8 +57,6 @@
 		4AD9773A2B8271880073CB1C /* FavoritesView+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritesView+TableView.swift"; sourceTree = "<group>"; };
 		4AD9773C2B8271DC0073CB1C /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		4AEA580B2B7448D400EB5E80 /* MarvelFavorites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelFavorites.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4AEA580E2B7448D400EB5E80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4AEA58102B7448D400EB5E80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4AEA58172B7448D400EB5E80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AEA581A2B7448D400EB5E80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AEA581C2B7448D400EB5E80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -216,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				4AC1A46C2D98381D00933D3E /* App */,
-				4AEA58222B74490800EB5E80 /* AppDelegate */,
 				4AD9770B2B758C730073CB1C /* Helper */,
 				4AD9772B2B825A250073CB1C /* Persistence */,
 				4AD977062B7453FC0073CB1C /* Network */,
@@ -228,15 +223,6 @@
 				4AEA581C2B7448D400EB5E80 /* Info.plist */,
 			);
 			path = MarvelFavorites;
-			sourceTree = "<group>";
-		};
-		4AEA58222B74490800EB5E80 /* AppDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				4AEA580E2B7448D400EB5E80 /* AppDelegate.swift */,
-				4AEA58102B7448D400EB5E80 /* SceneDelegate.swift */,
-			);
-			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,8 +328,6 @@
 				4AD9772D2B825AE00073CB1C /* DataController.swift in Sources */,
 				4AD9771A2B7819120073CB1C /* SearchCharactersView+TableView.swift in Sources */,
 				4AD977282B7F06E10073CB1C /* CharacterDetailsViewModel.swift in Sources */,
-				4AC1A46F2D983B2500933D3E /* SceneDelegate.swift in Sources */,
-				4AC1A4702D983B2500933D3E /* AppDelegate.swift in Sources */,
 				4AD9771D2B781A590073CB1C /* CharacterTableViewCell.swift in Sources */,
 				4AD977382B82711D0073CB1C /* FavoritesView.swift in Sources */,
 				4AD9773B2B8271880073CB1C /* FavoritesView+TableView.swift in Sources */,
