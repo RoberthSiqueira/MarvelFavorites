@@ -2,24 +2,14 @@ import SwiftUI
 
 @main
 struct MarvelFavoritesApp: App {
+
+    let dataController = DataController.shared
+
     var body: some Scene {
         WindowGroup {
-            MarvelFavoritesTab()
+            MainTabView().onAppear {
+                dataController.load()
+            }
         }
     }
-}
-
-struct MarvelFavoritesTab: UIViewControllerRepresentable {
-    typealias UIViewControllerType = TabBarController
-
-    func makeUIViewController(context: Context) -> TabBarController {
-        let tabbarController = TabBarController()
-        return tabbarController
-    }
-
-    func updateUIViewController(_ uiViewController: TabBarController, context: Context) { }
-}
-
-#Preview {
-    MarvelFavoritesTab()
 }
