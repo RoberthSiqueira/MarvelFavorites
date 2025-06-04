@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4AC1A46E2D98385300933D3E /* MarvelFavoritesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC1A46D2D98385300933D3E /* MarvelFavoritesApp.swift */; };
+		4AC1A4732DAAB14700933D3E /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC1A4722DAAB14700933D3E /* MainTabView.swift */; };
 		4AD977082B7454940073CB1C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD977072B7454940073CB1C /* TabBarController.swift */; };
 		4AD9770A2B7455EF0073CB1C /* MarvelClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD977092B7455EF0073CB1C /* MarvelClient.swift */; };
 		4AD9770D2B758C940073CB1C /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD9770C2B758C930073CB1C /* String+MD5.swift */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		4AC1A46D2D98385300933D3E /* MarvelFavoritesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelFavoritesApp.swift; sourceTree = "<group>"; };
+		4AC1A4722DAAB14700933D3E /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4AD977072B7454940073CB1C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4AD977092B7455EF0073CB1C /* MarvelClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelClient.swift; sourceTree = "<group>"; };
 		4AD9770C2B758C930073CB1C /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
@@ -79,6 +81,14 @@
 				4AC1A46D2D98385300933D3E /* MarvelFavoritesApp.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		4AC1A4712DAAB0F000933D3E /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				4AC1A4722DAAB14700933D3E /* MainTabView.swift */,
+			);
+			path = TabView;
 			sourceTree = "<group>";
 		};
 		4AD977032B7453A40073CB1C /* ViewController */ = {
@@ -212,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				4AC1A46C2D98381D00933D3E /* App */,
+				4AC1A4712DAAB0F000933D3E /* TabView */,
 				4AD9770B2B758C730073CB1C /* Helper */,
 				4AD9772B2B825A250073CB1C /* Persistence */,
 				4AD977062B7453FC0073CB1C /* Network */,
@@ -338,6 +349,7 @@
 				4AD977302B8261840073CB1C /* DataModel.xcdatamodeld in Sources */,
 				4AD977162B759A2F0073CB1C /* SearchCharactersView.swift in Sources */,
 				4AD9773D2B8271DC0073CB1C /* FavoritesViewController.swift in Sources */,
+				4AC1A4732DAAB14700933D3E /* MainTabView.swift in Sources */,
 				4AD9770A2B7455EF0073CB1C /* MarvelClient.swift in Sources */,
 				4AD977322B8269C00073CB1C /* FavoritesViewModel.swift in Sources */,
 			);
