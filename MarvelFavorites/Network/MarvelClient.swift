@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 
 class MarvelClient {
@@ -91,6 +92,28 @@ class MarvelClient {
         }
         task.resume()
         return task
+    }
+
+    func fetchCharactersWithCombine(namestarWith: String) -> AnyPublisher<[Character], NetworkError> {
+        guard let urlEncoded = namestarWith.queryAllowed else {
+            return Just([]).setFailureType(to: NetworkError.self).eraseToAnyPublisher()
+        }
+
+        let url = Endpoints.characters(nameStartsWith: urlEncoded).url
+        return getRequestWithCombine(url: url)
+    }
+
+    private func getRequestWithCombine<ResponseType: Decodable>(
+        url: URL
+    ) -> AnyPublisher<ResponseType, NetworkError> {
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map(\.data)
+            .decode(type: ResponseType.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .catch { error -> AnyPublisher<ResponseType, NetworkError> in
+                return Fail(error: NetworkError.badURL).eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
     }
 }
 
