@@ -8,4 +8,8 @@ extension String {
             .map { String(format: "%02x", $0) }
             .joined()
     }
+
+    var queryAllowed: String? {
+        return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+    }
 }
